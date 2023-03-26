@@ -3,7 +3,7 @@ import ExpenseItem from "./component/ExpenseItem";
 const App = () => {
   return (
     <div>
-      <h1>let's get Started React</h1>
+      <h3>Expense Items</h3>
       <ExpenseItem/>
     </div>
   );
