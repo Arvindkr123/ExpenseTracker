@@ -3,11 +3,11 @@ import ExpenseItem from "./component/ExpenseItem";
 const App = () => {
   return (
     <div>
-      <h3>Expense Items</h3>
+      <h1>let's get started</h1>
       <ExpenseItem/>
     </div>
-  );
-};
+  )
+}
 
 export default App;
 
