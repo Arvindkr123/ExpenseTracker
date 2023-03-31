@@ -1,28 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ExpenseForm.css";
 const ExpenseForm = () => {
-    const handleTitle =(e)=>{
-        console.log(e.target.value)
-    }
-  return <form>
-    <div className="new-expense__controls">
+  const [enterTitle, enterSetTitle] = useState(null);
+  const [enterAmount, enterSetAmount] = useState(null);
+  const [enterDate, enterSetDate] = useState(null);
+  const ChangeTitleHandler = (e) => {
+    // console.log(e.target.value);
+    enterSetTitle(e.target.value)
+    console.log(enterTitle)
+  };
+  const ChangeAmountHandler = (e) => {
+    // console.log(e.target.value);
+    enterSetAmount(e.target.value)
+    console.log(enterAmount)
+  };
+  const ChangeDateHandler = (e) => {
+    // console.log(e.target.value);
+    enterSetDate(e.target.value)
+    console.log(enterDate)
+  };
+  return (
+    <form>
+      <div className="new-expense__controls">
         <div className="new-expense__control">
-            <label>Title</label>
-            <input type="text" onChange={handleTitle} />
+          <label>Title</label>
+          <input type="text" onChange={ChangeTitleHandler} />
         </div>
         <div className="new-expense__control">
-            <label>Amount</label>
-            <input type="number" min={0.01} step={0.01} />
+          <label>Amount</label>
+          <input type="number" min={0.01} step={0.01} onChange={ChangeAmountHandler} />
         </div>
         <div className="new-expense__control">
-            <label>Date</label>
-            <input type="date" min={"2022-01-01"} max={"2023-12-01"} />
+          <label>Date</label>
+          <input type="date" min={"2022-01-01"} max={"2023-12-01"} onChange={ChangeDateHandler} />
         </div>
-    </div>
-    <div className="new-expense__actions">
+      </div>
+      <div className="new-expense__actions">
         <button type="submit">Add Expense</button>
-    </div>
-  </form>;
+      </div>
+    </form>
+  );
 };
 
 export default ExpenseForm;
