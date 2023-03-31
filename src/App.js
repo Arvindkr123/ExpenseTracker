@@ -1,5 +1,5 @@
 import React from "react";
-import Expenses from '../src/component/Expenses/Expenses'
+import Expenses from "../src/component/Expenses/Expenses";
 import NewExpense from "./component/Expenses/NewExpense/NewExpense";
 const App = () => {
   const expenses = [
@@ -35,14 +35,17 @@ const App = () => {
       location: "City kart",
     },
   ];
+  const addExpenseHandler = (expense) => {
+    console.log("App in js");
+    console.log(expense);
+  };
 
   return (
     <div>
-      <NewExpense/>
-      <Expenses item={expenses}/>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses item={expenses} />
     </div>
   );
 };
 
 export default App;
-
