@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Expenses from "../src/component/Expenses/Expenses";
 import NewExpense from "./component/Expenses/NewExpense/NewExpense";
+import Card from "./component/UI/Card";
+
 const App = () => {
-  const expenses = [
+  const [expenseList, setExpenseList] = useState([
     {
       id: "e1",
       title: "Car Insurance",
@@ -34,16 +36,20 @@ const App = () => {
       date: new Date(2021, 4, 12),
       location: "City kart",
     },
-  ];
+  ]);
+
   const addExpenseHandler = (expense) => {
-    console.log("App in js");
-    console.log(expense);
+    setExpenseList((prevExpenseList) => {
+      return [...prevExpenseList, expense];
+    });
   };
 
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses item={expenses} />
+      <Card className="expenses">
+        <Expenses item={expenseList} />
+      </Card>
     </div>
   );
 };
