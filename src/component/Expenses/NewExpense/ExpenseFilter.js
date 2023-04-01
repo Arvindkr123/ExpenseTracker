@@ -1,10 +1,11 @@
-import React from "react";
+import React, { cloneElement } from "react";
 
 import "./ExpensesFilter.css";
 
 const ExpensesFilter = (props) => {
   const dropdownChangeHandler = (event) => {
     props.onChangeFilter(event.target.value);
+    console.log(event.target.value)
   };
   return (
     <div className="expenses-filter">
