@@ -11,9 +11,30 @@ const Expenses = (props) => {
     // console.log(filteredYear);
   };
 
-  const filteredExpense = props.item.filter((expense)=>{
+  const filteredExpense = props.item.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
-  })
+  });
+
+  let expenseContent;
+  if (filteredExpense.length === 0) {
+    expenseContent = <p style={{ color: "white" }}>No expense found !</p>;
+  } else if (filteredExpense.length === 1) {
+    expenseContent = (
+      <p style={{ color: "white" }}>
+        Only single Expense here. Please add more...
+      </p>
+    );
+  } else {
+    expenseContent = filteredExpense.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+        // location={expense.location}
+      />
+    ));
+  }
 
   return (
     <Card className="expenses">
@@ -30,15 +51,7 @@ const Expenses = (props) => {
           // location={expense.location}
         />
       ))} */}
-      {filteredExpense.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-          // location={expense.location}
-        />
-      ))}
+      {expenseContent}
     </Card>
   );
 };
