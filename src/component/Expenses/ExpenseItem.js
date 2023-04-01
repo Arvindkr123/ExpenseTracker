@@ -17,7 +17,7 @@ const  ExpenseItem = (props) => {
       <ExpenseDetails
         // amount={props.amount}
         amount={amount}
-        location={props.location}
+        // location={props.location}
         // title={props.title}
         title={title}
       />
