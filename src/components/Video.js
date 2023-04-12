@@ -1,16 +1,20 @@
-import React from 'react'
+import "./Video.css";
 
-const Video = ({title, color}) => {
-    return (
-        <>
-        <img src="https://placeimg.com/180/180/nature" alt="picking image from the website" />
-        <h1 style={{backgroundColor:color}}>{title} </h1>
-        </>
-    )
+function Video({ title, channel = "Coder Dost", views, time }) {
+  return (
+    <>
+      <div className="container">
+        <div className="pic">
+          <img src="http://placeimg.com/160/90/any" alt="Katherine Johnson" />
+        </div>
+        <div className="title">{title}</div>
+        <div className="channel">{channel}</div>
+        <div className="views">
+          {views} views <span>.</span> {time}
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Video
-
-
-
-
+export default Video;
