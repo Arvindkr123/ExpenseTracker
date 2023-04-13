@@ -2,8 +2,10 @@ import React from "react";
 import "./PlayButton.css";
 
 const PlayButton = ({ onPlay, onPause, children }) => {
-  let playing = false;
-  const handleClick = () => {
+  let playing = true;
+  const handleClick = (e) => {
+    console.log(e)
+    e.stopPropagation();
     if (playing) {
       onPlay();
     } else {

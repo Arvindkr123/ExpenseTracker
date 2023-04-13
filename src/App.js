@@ -1,5 +1,6 @@
 import "./App.css";
 import PlayButton from "./Button/PlayButton";
+import Counter from "./components/Counter";
 import Video from "./components/Video";
 import videos from "./data/data";
 function App() {
@@ -16,19 +17,27 @@ function App() {
             channel={video.channel}
             verified={video.verified}
             id={video.id}
-          ></Video>
+          >
+            <PlayButton
+              onPlay={() => console.log("Playing.... ",video.title)}
+              onPause={() => console.log("Paused....", video.title)}
+            >
+             {video.title}
+            </PlayButton>
+          </Video>
         ))}
         <div style={{ clear: "both" }}>
           {/* <PlayButton onSmash={()=>console.log('HEllo Ak')}>Play-msg</PlayButton>
         <PlayButton onSmash={()=>console.log('HEllo Ak')}>Pause-msg</PlayButton> */}
 
-          <PlayButton
+          {/* <PlayButton
             onPlay={() => console.log("Play")}
             onPause={() => console.log("Pause")}
           >
             Play
-          </PlayButton>
+          </PlayButton> */}
         </div>
+        <Counter/>
       </div>
     </>
   );
