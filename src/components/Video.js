@@ -1,9 +1,15 @@
 import "./Video.css";
 
-function Video({ title, id, channel = "Coder Dost", views, time, verified, children }) {
+function Video({ title, id, channel = "Coder Dost", views, time, verified, children, deleteVideo, eidtVideo }) {
   return (
     <>
       <div className="container">
+        <div>
+          <button className="close" onClick={()=>deleteVideo(id)}>X</button>
+        </div>
+        <div>
+          <button className="edit" onClick={()=>eidtVideo(id)}>Edit</button>
+        </div>
         <div className="pic">
           <img
             src={`https://picsum.photos/id/${id}/160/90`}
