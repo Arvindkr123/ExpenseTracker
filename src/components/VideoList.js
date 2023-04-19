@@ -1,10 +1,8 @@
-import React from "react";
 import Video from "./Video";
-import PlayButton from "../Button/PlayButton";
-
-const VideoList = ({ videos, deleteVideo, editVideo}) => {
+import PlayButton from '../Button/PlayButton'
+function VideoList({ videos, dispatch, editVideo }) {
   return (
-    <div>
+    <>
       {videos.map((video) => (
         <Video
           key={video.id}
@@ -14,19 +12,19 @@ const VideoList = ({ videos, deleteVideo, editVideo}) => {
           channel={video.channel}
           verified={video.verified}
           id={video.id}
-          deleteVideo={deleteVideo}
-          eidtVideo={editVideo}
+          editVideo={editVideo}
+          dispatch={dispatch}
         >
           <PlayButton
-            onPlay={() => console.log("Playing..", video.title)}
-            onPause={() => console.log("Paused..", video.title)}
+            onPlay={() => console.log('Playing..', video.title)}
+            onPause={() => console.log('Paused..', video.title)}
           >
             {video.title}
           </PlayButton>
         </Video>
       ))}
-    </div>
-  );
-};
+    </>
+  )
+}
 
-export default VideoList;
+export default VideoList

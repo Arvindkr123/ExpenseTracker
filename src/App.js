@@ -1,42 +1,38 @@
-import { useState } from "react";
-import "./App.css";
-import videoDB from "./data/data";
-import AddVideo from "./components/AddVideo";
-import VideoList from "./components/VideoList";
+import { useReducer, useState } from 'react';
+import './App.css';
+import AddVideo from './components/AddVideo';
+import videoDB from './data/data';
+import VideoList from './components/VideoList';
 function App() {
-  console.log("render App");
-
-  const [videos, setVideos] = useState(videoDB);
+  console.log('render App')
   const [editableVideo, setEditableVideo] = useState(null);
-
-  const addVideos = (video) => {
-    setVideos([...videos, { ...video, id: videos.length + 1 }]);
-  };
-
-  const updateVideo = (video) => {
-    // first find the index
-    const index = videos.findIndex(v => v.id === video.id);
-    // then apply the splice method
-    const newVideos = [...videos];
-    newVideos.splice(index, 1, video);
-    setVideos(newVideos)
-  };
-
-  const deleteVideo = (id) => {
-    setVideos(videos.filter(video => video.id !== id))
-    // console.log(id)
-  };
-  const editVideo = (id) => {
+  function videoReducer(videos, action) {
+    switch (action.type) {
+      case 'ADD':
+        return [
+          ...videos,
+          { ...action.payload, id: videos.length + 1 }
+        ]
+      case 'DELETE':
+        return videos.filter(video => video.id !== action.payload)
+      case 'UPDATE':
+        const index = videos.findIndex(v => v.id === action.payload.id)
+        const newVideos = [...videos]
+        newVideos.splice(index, 1, action.payload)
+        setEditableVideo(null);
+        return newVideos;
+      default:
+        return videos
+    }
+  }
+  const [videos, dispatch] = useReducer(videoReducer, videoDB)
+  function editVideo(id) {
     setEditableVideo(videos.find(video => video.id === id))
-    // console.log(id)
-  };
-
+  }
   return (
-    <div className="App" onClick={() => console.log("App")}>
-      <div>
-        <AddVideo addVideos={addVideos} editableVideo={editableVideo} updateVideo={updateVideo} />
-      </div>
-      <VideoList deleteVideo={deleteVideo} editVideo={editVideo} videos={videos} />
+    <div className="App" onClick={() => console.log('App')}>
+      <AddVideo dispatch={dispatch} editableVideo={editableVideo}></AddVideo>
+      <VideoList dispatch={dispatch} editVideo={editVideo} videos={videos}></VideoList>
     </div>
   );
 }

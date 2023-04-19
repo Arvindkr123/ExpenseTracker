@@ -1,29 +1,22 @@
-import "./Video.css";
-
-function Video({ title, id, channel = "Coder Dost", views, time, verified, children, deleteVideo, eidtVideo }) {
+import './Video.css';
+function Video({ title, id, channel = "Coder Dost", views, time, verified, children, dispatch, editVideo }) {
+  console.log('render Video')
   return (
     <>
-      <div className="container">
-        <div>
-          <button className="close" onClick={()=>deleteVideo(id)}>X</button>
-        </div>
-        <div>
-          <button className="edit" onClick={()=>eidtVideo(id)}>Edit</button>
-        </div>
+      <div className='container'>
+        <button className='close' onClick={() => dispatch({ type: 'DELETE', payload: id })}>X</button>
+        <button className='edit' onClick={() => editVideo(id)}>Edit</button>
         <div className="pic">
-          <img
-            src={`https://picsum.photos/id/${id}/160/90`}
-            alt="Katherine Johnson"
-          />
+          <img src={`https://picsum.photos/id/${id}/160/90`} alt="Katherine Johnson" />
         </div>
         <div className="title">{title}</div>
-        <div className="channel">
-          {channel} {verified && "✅"}{" "}
-        </div>
+        <div className="channel">{channel} {verified && '✅'} </div>
         <div className="views">
           {views} views <span>.</span> {time}
         </div>
-        {children}
+        <div>
+          {children}
+        </div>
       </div>
     </>
   );
