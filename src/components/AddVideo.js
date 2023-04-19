@@ -1,45 +1,48 @@
-import VideoDispatchContext from '../Context/VideoDispatchContext';
 import './AddVideo.css';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useRef, useState} from 'react';
+import useVideoDispatch from '../Hooks/VideoDispatch';
 
 const initialState = {
-  time: '1 month ago',
-  channel: 'Coder Dost',
-  verified: true,
-  title: '',
-  views: ''
-}
+    time: '1 month ago',
+    channel: 'Coder Dost',
+    verified: true,
+    title:'',
+    views:''
+  }
 
-function AddVideo({editableVideo }) {
+function AddVideo({editableVideo}) {
   const [video, setVideo] = useState(initialState);
-  const dispatch = useContext(VideoDispatchContext);
+  const dispatch = useVideoDispatch();
+  const inputRef =  useRef(null);
+
   function handleSubmit(e) {
     e.preventDefault();
-    if (editableVideo) {
-      dispatch({ type: 'UPDATE', payload: video })
-    } else {
-      dispatch({ type: 'ADD', payload: video })
+    if(editableVideo){
+      dispatch({type:'UPDATE',payload:video})
+    }else{
+      dispatch({type:'ADD',payload:video})
     }
-
+    
     setVideo(initialState)
 
   }
   function handleChange(e) {
-    setVideo({
-      ...video,
-      [e.target.name]: e.target.value
+    setVideo({...video,
+        [e.target.name] : e.target.value
     })
   }
 
-  useEffect(() => {
-    if (editableVideo) {
+  useEffect(()=>{
+    if(editableVideo){
       setVideo(editableVideo)
     }
-  }, [editableVideo])
+    inputRef.current.focus()
+  },[editableVideo])
 
   return (
     <form>
       <input
+        ref={inputRef}
         type="text"
         name="title"
         onChange={handleChange}
@@ -56,7 +59,7 @@ function AddVideo({editableVideo }) {
       <button
         onClick={handleSubmit}
       >
-        {editableVideo ? 'Edit' : 'Add'} Video
+        {editableVideo?'Edit':'Add'} Video
       </button>
     </form>
   );
